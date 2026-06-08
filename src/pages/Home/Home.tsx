@@ -10,11 +10,11 @@ import {
     Button,
     Badge,
     Space,
-    
+
 } from "antd";
-import { 
-    ShoppingCartOutlined,  
-    ArrowRightOutlined, 
+import {
+    ShoppingCartOutlined,
+    ArrowRightOutlined,
     FireFilled,
     CodeSandboxOutlined,
     RocketOutlined,
@@ -103,7 +103,7 @@ const Home = () => {
                     boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)"
                 }}
             >
-                <div 
+                <div
                     style={{ fontWeight: 900, color: "white", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, letterSpacing: "-0.5px" }}
                     onClick={() => navigate("/")}
                 >
@@ -120,22 +120,22 @@ const Home = () => {
 
                 <Space size="middle" align="center">
                     <Button type="text" shape="circle" icon={<SearchOutlined style={{ fontSize: 20, color: "white" }} />} className="hover-icon" />
-                   
+
                 </Space>
             </Header>
 
             <Content style={{ maxWidth: 1300, margin: "0 auto", width: "100%", padding: "40px 24px" }}>
                 <div className="hero-section">
                     <div style={{ position: "relative", zIndex: 2 }}>
-                        <Badge 
-                            count="⚡ HƏFTƏNİN ENDİRİMLƏRİ" 
-                            style={{ backgroundColor: "rgba(56, 189, 248, 0.2)", color: "#38bdf8", padding: "0 12px", fontWeight: 700, letterSpacing: 1.5, marginBottom: 25, borderRadius: 20, border: "1px solid rgba(56, 189, 248, 0.4)" }} 
+                        <Badge
+                            count="⚡ HƏFTƏNİN ENDİRİMLƏRİ"
+                            style={{ backgroundColor: "rgba(56, 189, 248, 0.2)", color: "#38bdf8", padding: "0 12px", fontWeight: 700, letterSpacing: 1.5, marginBottom: 25, borderRadius: 20, border: "1px solid rgba(56, 189, 248, 0.4)" }}
                         />
                         <Title style={{ color: "white", fontSize: "4.5rem", fontWeight: 900, marginBottom: 20, letterSpacing: "-2px", lineHeight: 1.1 }}>
-                            Kəşf Et. Seç. <br/><span style={{ background: "linear-gradient(to right, #38bdf8, #818cf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Zövqlə Geyin.</span>
+                            Kəşf Et. Seç. <br /><span style={{ background: "linear-gradient(to right, #38bdf8, #818cf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Zövqlə Geyin.</span>
                         </Title>
                         <Paragraph style={{ color: "#cbd5e1", fontSize: "1.25rem", maxWidth: 600, margin: "0 auto 40px auto", fontWeight: 400, lineHeight: 1.7 }}>
-                            Sizin üçün xüsusi seçilmiş premium kolleksiyalar. 
+                            Sizin üçün xüsusi seçilmiş premium kolleksiyalar.
                             Stilinizi ən son dünya trendləri ilə yeniləyin.
                         </Paragraph>
                         <Space size="middle">
@@ -186,13 +186,13 @@ const Home = () => {
 
                     <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 10 }} className="hide-scrollbar">
                         {categories.map((cat) => (
-                            <Button 
+                            <Button
                                 key={cat}
-                                shape="round" 
+                                shape="round"
                                 size="large"
                                 onClick={() => setActiveCategory(cat)}
-                                style={{ 
-                                    border: activeCategory === cat ? "none" : "1px solid #e2e8f0", 
+                                style={{
+                                    border: activeCategory === cat ? "none" : "1px solid #e2e8f0",
                                     background: activeCategory === cat ? "#0f172a" : "white",
                                     color: activeCategory === cat ? "white" : "#475569",
                                     fontWeight: activeCategory === cat ? 600 : 500,
@@ -216,18 +216,18 @@ const Home = () => {
                                     <Card
                                         hoverable
                                         className="premium-product-card"
-                                       styles={{ body: { padding: "24px" } }}
+                                        styles={{ body: { padding: "24px" } }}
                                         cover={
                                             <div className="img-container">
                                                 <Image
-                                                    src={images[0] || FALLBACK_IMG}
+                                                    src={images[0] ? images[0].replace("http://161.97.154.119", "") : FALLBACK_IMG}
                                                     fallback={FALLBACK_IMG}
                                                     preview={false}
-                                                    className="product-img"
+                                                    style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover" }}
                                                 />
-                                                <Button 
-                                                    shape="circle" 
-                                                    icon={<HeartOutlined />} 
+                                                <Button
+                                                    shape="circle"
+                                                    icon={<HeartOutlined />}
                                                     className="wishlist-btn"
                                                 />
                                             </div>
@@ -236,7 +236,7 @@ const Home = () => {
                                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                             <Text style={{ fontSize: 12, letterSpacing: 1.5, textTransform: "uppercase", fontWeight: 700, color: "#94a3b8" }}>{product.sku}</Text>
                                             <div style={{ display: "flex", gap: 2 }}>
-                                                {[1,2,3,4,5].map(star => <span key={star} style={{ color: "#fbbf24", fontSize: 12 }}>★</span>)}
+                                                {[1, 2, 3, 4, 5].map(star => <span key={star} style={{ color: "#fbbf24", fontSize: 12 }}>★</span>)}
                                             </div>
                                         </div>
 
@@ -251,10 +251,10 @@ const Home = () => {
                                                     {product.price} <span style={{ fontSize: 14, fontWeight: 600, color: "#64748b" }}>AZN</span>
                                                 </Text>
                                             </div>
-                                            <Button 
-                                                shape="circle" 
-                                                type="primary" 
-                                                icon={<ShoppingCartOutlined />} 
+                                            <Button
+                                                shape="circle"
+                                                type="primary"
+                                                icon={<ShoppingCartOutlined />}
                                                 className="cart-action-btn"
                                             />
                                         </div>
@@ -279,7 +279,7 @@ const Home = () => {
             {/* FOOTER */}
             <Footer style={{ marginTop: 120, background: "#0a0f1d", color: "#cbd5e1", padding: "80px 20px 30px" }}>
                 <div style={{ maxWidth: 1300, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 60 }}>
-                    
+
                     {/* Brand & Newsletter */}
                     <div style={{ gridColumn: "1 / -1", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 30, paddingBottom: 50, borderBottom: "1px solid rgba(255,255,255,0.05)", marginBottom: 50 }}>
                         <div>
@@ -291,12 +291,12 @@ const Home = () => {
                             </div>
                             <p style={{ color: "#94a3b8", fontSize: 16, maxWidth: 400, margin: 0 }}>Rəqəmsal ticarətin yeni ünvanı. Ən yaxşı qiymət və 100% orijinal məhsul zəmanəti.</p>
                         </div>
-                        
+
                         {/* Bulletproof Newsletter Form */}
                         <div style={{ background: "rgba(255,255,255,0.03)", padding: 10, borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)", display: "flex", width: "100%", maxWidth: 450 }}>
-                            <input 
-                                placeholder="E-poçt ünvanınızı yazın..." 
-                                style={{ background: "transparent", border: "none", outline: "none", color: "white", padding: "0 20px", flex: 1, fontSize: 15 }} 
+                            <input
+                                placeholder="E-poçt ünvanınızı yazın..."
+                                style={{ background: "transparent", border: "none", outline: "none", color: "white", padding: "0 20px", flex: 1, fontSize: 15 }}
                             />
                             <Button type="primary" shape="round" style={{ background: "#38bdf8", color: "#0f172a", fontWeight: 700, border: "none", height: 44, padding: "0 30px" }}>
                                 Abunə Ol
@@ -345,7 +345,7 @@ const Home = () => {
             </Footer>
 
             {/* SUPER PREMIUM CSS STYLES & ANIMATIONS */}
-      
+
         </Layout>
     );
 };
