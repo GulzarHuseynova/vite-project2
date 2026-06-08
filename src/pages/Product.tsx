@@ -8,12 +8,12 @@ import {
     FireOutlined
 } from "@ant-design/icons";
 import { ProductService, type ProductItem, type GetAllParams } from "../../src/services/ProductService";
-import CategoryService from "../../src/services/CategoryService"; 
+import CategoryService from "../../src/services/CategoryService";
 import { getProductImages, FALLBACK_IMG } from "../../src/utils/ProductHelpers";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
-const { Header } = Layout; 
+const { Header } = Layout;
 const pageSize = 12;
 
 interface CategoryType {
@@ -35,16 +35,16 @@ const Product = () => {
 
     const [allProducts, setAllProducts] = useState<ProductItemWithCategory[]>([]);
     const [categories, setCategories] = useState<CategoryType[]>([]);
-    const [loading, setLoading]   = useState(false);
-    const [hasMore, setHasMore]   = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const page        = Number(searchParams.get("page")     ?? "1");
-    const search      = searchParams.get("search")          ?? "";
-    const sort        = searchParams.get("sort")            ?? "";
-    const minPriceRaw = searchParams.get("minPrice")        ?? "";
-    const maxPriceRaw = searchParams.get("maxPrice")        ?? "";
-    const category    = searchParams.get("category")        ?? ""; 
+    const page = Number(searchParams.get("page") ?? "1");
+    const search = searchParams.get("search") ?? "";
+    const sort = searchParams.get("sort") ?? "";
+    const minPriceRaw = searchParams.get("minPrice") ?? "";
+    const maxPriceRaw = searchParams.get("maxPrice") ?? "";
+    const category = searchParams.get("category") ?? "";
 
     const [localSearch, setLocalSearch] = useState(search);
     const isUserTyping = useRef(false);
@@ -84,9 +84,9 @@ const Product = () => {
         const fetchCategories = async () => {
             try {
                 const categoryResponse = await CategoryService.getOptions();
-            
-                const resData = (categoryResponse && typeof categoryResponse === "object" && "data" in categoryResponse) 
-                    ? (categoryResponse as Record<string, unknown>).data 
+
+                const resData = (categoryResponse && typeof categoryResponse === "object" && "data" in categoryResponse)
+                    ? (categoryResponse as Record<string, unknown>).data
                     : categoryResponse;
 
                 let rawList: unknown[] = [];
@@ -128,17 +128,17 @@ const Product = () => {
         const load = async () => {
             setLoading(true);
             try {
-            
+
                 const params: GetAllParams & { categoryId?: string; name?: string } = {
-                    page, 
+                    page,
                     pageSize,
                     search: search || undefined,
-                    name: search ? search.trim() : undefined, 
+                    name: search ? search.trim() : undefined,
                     minPrice: minPriceRaw ? Number(minPriceRaw) : undefined,
                     maxPrice: maxPriceRaw ? Number(maxPriceRaw) : undefined,
-                    categoryId: category || undefined, 
+                    categoryId: category || undefined,
                 };
-                
+
                 const res = await ProductService.getAll(params);
                 if (!isMounted) return;
 
@@ -160,16 +160,16 @@ const Product = () => {
         return () => { isMounted = false; };
     }, [page, search, minPriceRaw, maxPriceRaw, category]);
 
-   
+
     const filteredProducts = useMemo(() => {
         const result = [...allProducts];
 
         if (sort) {
             result.sort((a, b) => {
-                if (sort === "price_asc")  return a.price - b.price;
+                if (sort === "price_asc") return a.price - b.price;
                 if (sort === "price_desc") return b.price - a.price;
-                if (sort === "name_asc")   return a.name.localeCompare(b.name);
-                if (sort === "name_desc")  return b.name.localeCompare(a.name);
+                if (sort === "name_asc") return a.name.localeCompare(b.name);
+                if (sort === "name_desc") return b.name.localeCompare(a.name);
                 return 0;
             });
         }
@@ -214,14 +214,14 @@ const Product = () => {
                         boxShadow: "0 10px 40px -10px rgba(0,0,0,0.15)"
                     }}
                 >
-                    <div 
+                    <div
                         style={{ fontWeight: 900, color: "white", fontSize: 26, cursor: "pointer", display: "flex", alignItems: "center", gap: 12, letterSpacing: "-0.5px", fontFamily: "'Outfit', sans-serif" }}
                         onClick={() => navigate("/")}
                     >
                         <div style={{ background: "linear-gradient(135deg, #38bdf8, #6366f1)", borderRadius: 12, padding: 8, display: "flex", boxShadow: "0 4px 20px rgba(56, 189, 248, 0.5)" }}>
                             <CodeSandboxOutlined style={{ color: "white", fontSize: 26 }} />
                         </div>
-                        MyShop<span style={{color: "#38bdf8", fontSize: 32, lineHeight: 0}}>.</span>
+                        MyShop<span style={{ color: "#38bdf8", fontSize: 32, lineHeight: 0 }}>.</span>
                     </div>
 
                     <div style={{ display: "flex", gap: 45, alignItems: "center" }}>
@@ -238,11 +238,11 @@ const Product = () => {
 
                     <div className="premium-hero-banner">
                         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                            <div style={{ 
-                                background: "linear-gradient(135deg, rgba(56,189,248,0.2), rgba(99,102,241,0.2))", 
-                                borderRadius: 20, 
-                                padding: "16px", 
-                                display: "flex", 
+                            <div style={{
+                                background: "linear-gradient(135deg, rgba(56,189,248,0.2), rgba(99,102,241,0.2))",
+                                borderRadius: 20,
+                                padding: "16px",
+                                display: "flex",
                                 border: "1px solid rgba(255,255,255,0.5)",
                                 boxShadow: "inset 0 2px 10px rgba(255,255,255,0.5)"
                             }}>
@@ -277,7 +277,7 @@ const Product = () => {
                                 />
                             </Col>
                             <Col>
-                                <Badge count={activeFilterCount} size="medium" offset={[-6, 6]} color="#6366f1" style={{boxShadow: "0 0 0 2px #fff"}}>
+                                <Badge count={activeFilterCount} size="medium" offset={[-6, 6]} color="#6366f1" style={{ boxShadow: "0 0 0 2px #fff" }}>
                                     <Button
                                         size="large"
                                         icon={<FilterOutlined />}
@@ -304,7 +304,7 @@ const Product = () => {
                         title={
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                 <Space>
-                                    <div style={{background: "rgba(56,189,248,0.1)", padding: 8, borderRadius: 10, display: "flex"}}>
+                                    <div style={{ background: "rgba(56,189,248,0.1)", padding: 8, borderRadius: 10, display: "flex" }}>
                                         <FilterOutlined style={{ color: "#38bdf8", fontSize: 20 }} />
                                     </div>
                                     <span style={{ fontWeight: 800, fontSize: 20, color: "#0f172a" }}>Filtrlər</span>
@@ -349,7 +349,7 @@ const Product = () => {
                                 ))}
                             </Select>
                         </div>
-                        
+
                         <div style={{ marginBottom: 32 }}>
                             <Text strong style={{ display: "block", marginBottom: 12, color: "#334155", fontSize: 16, fontWeight: 700 }}>
                                 Qiymət aralığı (AZN)
@@ -384,10 +384,10 @@ const Product = () => {
                                 styles={{ popup: { root: { borderRadius: 16 } } }}
                             >
                                 <Option value="default">Seçim edin</Option>
-                                <Option value="price_asc"><Space><SortAscendingOutlined style={{color:"#6366f1"}}/> Qiymət: Ucuzdan bahaya</Space></Option>
-                                <Option value="price_desc"><Space><SortDescendingOutlined style={{color:"#6366f1"}}/> Qiymət: Bahadan ucuza</Space></Option>
-                                <Option value="name_asc"><Space><ArrowUpOutlined style={{color:"#6366f1"}}/> Ad: A-Z</Space></Option>
-                                <Option value="name_desc"><Space><ArrowDownOutlined style={{color:"#6366f1"}}/> Ad: Z-A</Space></Option>
+                                <Option value="price_asc"><Space><SortAscendingOutlined style={{ color: "#6366f1" }} /> Qiymət: Ucuzdan bahaya</Space></Option>
+                                <Option value="price_desc"><Space><SortDescendingOutlined style={{ color: "#6366f1" }} /> Qiymət: Bahadan ucuza</Space></Option>
+                                <Option value="name_asc"><Space><ArrowUpOutlined style={{ color: "#6366f1" }} /> Ad: A-Z</Space></Option>
+                                <Option value="name_desc"><Space><ArrowDownOutlined style={{ color: "#6366f1" }} /> Ad: Z-A</Space></Option>
                             </Select>
                         </div>
 
@@ -396,13 +396,13 @@ const Product = () => {
                             size="large"
                             block
                             onClick={() => setDrawerOpen(false)}
-                            style={{ 
-                                borderRadius: 16, 
-                                height: 56, 
-                                background: "linear-gradient(135deg, #38bdf8, #6366f1)", 
-                                border: "none", 
-                                fontWeight: 800, 
-                                fontSize: 17, 
+                            style={{
+                                borderRadius: 16,
+                                height: 56,
+                                background: "linear-gradient(135deg, #38bdf8, #6366f1)",
+                                border: "none",
+                                fontWeight: 800,
+                                fontSize: 17,
                                 boxShadow: "0 12px 24px -6px rgba(99, 102, 241, 0.4)",
                                 letterSpacing: "0.5px"
                             }}
@@ -428,7 +428,7 @@ const Product = () => {
                                     {/* Image */}
                                     <div className="prod-card-img">
                                         <Image
-                                            src={images[0] || FALLBACK_IMG}
+                                            src={images[0] ? images[0].replace("http://161.97.154.119", "") : FALLBACK_IMG}
                                             fallback={FALLBACK_IMG}
                                             preview={false}
                                             style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover" }}
@@ -440,7 +440,7 @@ const Product = () => {
                                         <Title level={5} style={{ margin: "0 0 8px", fontSize: 19, color: "#0f172a", fontWeight: 800, lineHeight: 1.3 }}>
                                             {product.name}
                                         </Title>
-                                        <Text type="secondary" style={{ fontSize: 14, fontWeight: 500, color: "#94a3b8" }}>SKU: <span style={{color: "#64748b"}}>{product.sku}</span></Text>
+                                        <Text type="secondary" style={{ fontSize: 14, fontWeight: 500, color: "#94a3b8" }}>SKU: <span style={{ color: "#64748b" }}>{product.sku}</span></Text>
                                     </div>
 
                                     {/* Price + Button */}
@@ -453,7 +453,7 @@ const Product = () => {
                                                 </Text>
                                             </div>
                                             <div style={{ display: "flex", gap: 3, background: "#fffbeb", padding: "6px 10px", borderRadius: 10, border: "1px solid #fef3c7" }}>
-                                                {[1,2,3,4,5].map(s => <span key={s} style={{ color: "#fbbf24", fontSize: 13 }}>★</span>)}
+                                                {[1, 2, 3, 4, 5].map(s => <span key={s} style={{ color: "#fbbf24", fontSize: 13 }}>★</span>)}
                                             </div>
                                         </div>
                                         <button className="prod-detail-btn" onClick={() => navigate(`/ProductDetail/${product.id}`)}>
@@ -470,13 +470,13 @@ const Product = () => {
                             <div style={{ fontSize: 72, marginBottom: 24, filter: "drop-shadow(0 15px 15px rgba(0,0,0,0.08))" }}>🛍️</div>
                             <Title level={2} style={{ color: "#0f172a", fontWeight: 900, letterSpacing: "-0.5px" }}>Təəssüf ki, heç nə tapılmadı</Title>
                             <Text style={{ color: "#64748b", fontSize: 18, fontWeight: 500 }}>Fərqli axtarış sözü və ya filtrasiya ilə yenidən yoxlayın.</Text>
-                            <br/>
-                            <Button type="primary" size="large" onClick={clearAllFilters} style={{marginTop: 24, borderRadius: 12, background: "#0f172a", height: 48, padding: "0 32px"}}>
+                            <br />
+                            <Button type="primary" size="large" onClick={clearAllFilters} style={{ marginTop: 24, borderRadius: 12, background: "#0f172a", height: 48, padding: "0 32px" }}>
                                 Bütün filtrləri sıfırla
                             </Button>
                         </div>
                     )}
-                    
+
                     {hasMore && filteredProducts.length > 0 && (
                         <div style={{ textAlign: "center", marginTop: 64, marginBottom: 40 }}>
                             <Button
